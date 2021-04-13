@@ -1,17 +1,17 @@
 version: '3'
 services:
-  commonBash_build:
-    image: "${DOCKHUB_USER}/commonBash:${ARCHITECTUR}_${OS_VERSION}"
+  commonbash_build:
+    image: "${DOCKHUB_USER}/commonbash:${ARCHITECTUR}_${OS_VERSION}"
     build:
       context: .
       args:
         OS_VERSION: ${OS_VERSION}
         PLATFORM: ${ARCHITECTUR}
       dockerfile: Dockerfile-commonBash
-  commonBash:
-    image: "${DOCKHUB_USER}/commonBash:${ARCHITECTUR}_${OS_VERSION}"
-    container_name: commonBash
-    hostname: commonBash
+  commonbash:
+    image: "${DOCKHUB_USER}/commonbash:${ARCHITECTUR}_${OS_VERSION}"
+    container_name: commonbash
+    hostname: commonbash
     network_mode: "host"
     environment:
       - ROS_MASTER_URI=http://localhost:11311

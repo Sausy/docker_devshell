@@ -16,12 +16,12 @@ echo "TIP: to change these vars"
 echo "edit the '.env' file"
 echo "======================="
 
-PROJECT_NAME=commonBash
+PROJECT_NAME=commonbash
 
 postFix="${ARCHITECTUR}_${OS_VERSION}"
 DOCKER_HUB_NAME="${DOCKHUB_USER}/${PROJECT_NAME}:${postFix}"
 
-echo "==========[ROSCORE]============="
+echo "==========[commonbash]============="
 fallBack=0
 read -p "Use prebuild container [Y/n]" -n 1 -r
 if [[ ! $REPLY =~ ^[Nn]$ ]]
