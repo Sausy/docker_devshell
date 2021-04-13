@@ -1,0 +1,19 @@
+version: '3'
+services:
+  commonBash_build:
+    image: "${DOCKHUB_USER}/commonBash:${ARCHITECTUR}_${OS_VERSION}"
+    build:
+      context: .
+      args:
+        OS_VERSION: ${OS_VERSION}
+        PLATFORM: ${ARCHITECTUR}
+      dockerfile: Dockerfile-commonBash
+  commonBash:
+    image: "${DOCKHUB_USER}/commonBash:${ARCHITECTUR}_${OS_VERSION}"
+    container_name: commonBash
+    hostname: commonBash
+    network_mode: "host"
+    environment:
+      - ROS_MASTER_URI=http://localhost:11311
+    devices:
+      - /dev/hidraw*:/dev/hidraw*
