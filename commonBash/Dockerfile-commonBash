@@ -14,6 +14,7 @@ RUN mkdir /data && \
     apt-get update && \
     apt-get install -y sudo && \
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -qq tzdata && \
+    DEBIAN_FRONTEND=noninteractive apt-get install keyboard-configuration && \
     apt-get install -y git nano curl man wget unzip tar gnupg2 && \
     apt-get install -y vim lsb-release lsb-core build-essential autoconf libtool cmake pkg-config && \
     #====== add user userdev:ubuntu ==== && \
