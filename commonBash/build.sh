@@ -24,7 +24,7 @@ DOCKER_HUB_NAME="${DOCKHUB_USER}/${PROJECT_NAME}:${postFix}"
 docker kill commonbash
 sleep 5
 
-echo "==========[commonbash]============="
+echo "==========[${PROJECT_NAME}]============="
 fallBack=0
 read -p "Use prebuild container [Y/n]" -n 1 -r
 if [[ ! $REPLY =~ ^[Nn]$ ]]
