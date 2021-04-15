@@ -21,6 +21,9 @@ PROJECT_NAME=commonbash
 postFix="${ARCHITECTUR}_${OS_VERSION}"
 DOCKER_HUB_NAME="${DOCKHUB_USER}/${PROJECT_NAME}:${postFix}"
 
+docker kill commonbash
+sleep 5
+
 echo "==========[commonbash]============="
 fallBack=0
 read -p "Use prebuild container [Y/n]" -n 1 -r

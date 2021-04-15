@@ -4,17 +4,16 @@ FROM --platform=linux/$PLATFORM ubuntu:$OS_VERSION
 
 ARG ROS_DIST
 
-RUN mkdir /src && \
-    echo "" > /src/entry.sh && \
-    chmod +x /src/entry.sh
+COPY ./entry.sh /entry.sh
+CMD bash -C '/entry.sh';'bash'
 
-COPY ./entry.sh /src/entry.sh
+WORKDIR /home/userdev
 
 RUN mkdir /data && \
     apt-get update && \
     apt-get install -y sudo && \
-    DEBIAN_FRONTEND=noninteractive sudo apt-get install -qq tzdata && \
-    DEBIAN_FRONTEND=noninteractive apt-get install keyboard-configuration && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y -qq tzdata && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y keyboard-configuration && \
     apt-get install -y git nano curl man wget unzip tar gnupg2 && \
     apt-get install -y vim lsb-release lsb-core build-essential autoconf libtool cmake pkg-config && \
     #====== add user userdev:ubuntu ==== && \
@@ -22,13 +21,13 @@ RUN mkdir /data && \
     useradd -ms /bin/bash userdev && \
     echo "userdev:ubuntu" | chpasswd && \
     adduser userdev sudo && \
-    echo "userdev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
-    #====== install python stuff ==== && \
+    echo "userdev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers 
+RUN #====== install python stuff ==== && \
     apt-get install -y python3-dev python3 python3-pip && \
     #apt-get install -y python-dev python-pip \
     apt-get install -y libssl-dev libffi-dev && \
-    pip3 install --user --upgrade pip && \
-    #====== PRE INSTALL ROS 1 ==== && \
+    pip3 install --user --upgrade pip 
+RUN #====== PRE INSTALL ROS 1 ==== && \
     sudo locale-gen en_US en_US.UTF-8 && \
     sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 && \
     export LANG=en_US.UTF-8 && \
@@ -38,11 +37,11 @@ RUN mkdir /data && \
     sudo locale-gen en_US en_US.UTF-8 && \
     sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 && \
     export LANG=en_US.UTF-8 && \
-    sudo apt-get update && \
     curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add - && \
-    sudo sh -c 'echo "deb http://packages.ros.org/ros2/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list'
+    sudo sh -c 'echo "deb http://packages.ros.org/ros2/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list' && \
+    sudo apt-get update
 
 USER userdev
-WORKDIR /home/userdev
+#WORKDIR /home/userdev
 
-CMD bash -C '/src/entry.sh';'bash'
+#CMD bash -C '/src/entry.sh';'bash'
