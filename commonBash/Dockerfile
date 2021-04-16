@@ -23,7 +23,7 @@ RUN mkdir /data && \
     adduser userdev sudo && \
     echo "userdev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     #===== change permissions === && \
-    chown -R userdev /home/userdev
+    chown -R userdev:userdev /home/userdev
 RUN #====== install python stuff ==== && \
     apt-get install -y python3-dev python3 python3-pip && \
     #apt-get install -y python-dev python-pip \
