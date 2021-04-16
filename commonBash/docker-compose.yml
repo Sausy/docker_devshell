@@ -7,7 +7,7 @@ services:
       args:
         OS_VERSION: ${OS_VERSION}
         PLATFORM: ${ARCHITECTUR}
-      dockerfile: Dockerfile-commonBash
+      dockerfile: Dockerfile
   commonbash:
     image: "${DOCKHUB_USER}/commonbash:${ARCHITECTUR}_${OS_VERSION}"
     container_name: commonbash

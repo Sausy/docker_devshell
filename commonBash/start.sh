@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-docker stop roscore
-docker rm roscore
-#docker-compose build roscore
-docker-compose up -d roscore
+docker stop commonbash
+docker rm commonbash
+docker-compose up -d commonbash

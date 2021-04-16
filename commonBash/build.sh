@@ -21,8 +21,8 @@ PROJECT_NAME=commonbash
 postFix="${ARCHITECTUR}_${OS_VERSION}"
 DOCKER_HUB_NAME="${DOCKHUB_USER}/${PROJECT_NAME}:${postFix}"
 
-docker kill commonbash
-sleep 5
+docker kill ${PROJECT_NAME}
+sleep 2
 
 echo "==========[${PROJECT_NAME}]============="
 fallBack=0
