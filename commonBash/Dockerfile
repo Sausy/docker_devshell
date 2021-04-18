@@ -10,6 +10,8 @@ CMD bash -C '/entry.sh';'bash'
 WORKDIR /home/userdev
 
 RUN mkdir /data && \
+    mkdir /common && \
+    mkdir /common/lib && \
     apt-get update && \
     apt-get install -y sudo && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y -qq tzdata && \
@@ -24,26 +26,12 @@ RUN mkdir /data && \
     echo "userdev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     #===== change permissions === && \
     chown -R userdev:userdev /home/userdev
-RUN #====== install python stuff ==== && \
+    #====== install python stuff ==== && \
     apt-get install -y python3-dev python3 python3-pip && \
     #apt-get install -y python-dev python-pip \
     apt-get install -y libssl-dev libffi-dev && \
     pip3 install --user --upgrade pip 
-RUN #====== PRE INSTALL ROS 1 ==== && \
-    sudo locale-gen en_US en_US.UTF-8 && \
-    sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 && \
-    export LANG=en_US.UTF-8 && \
-    sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' && \
-    sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
-    #====== PRE INSTALL ROS 2 ==== && \
-    sudo locale-gen en_US en_US.UTF-8 && \
-    sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 && \
-    export LANG=en_US.UTF-8 && \
-    curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add - && \
-    sudo sh -c 'echo "deb http://packages.ros.org/ros2/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list' && \
-    sudo apt-get update
 
 USER userdev
 #WORKDIR /home/userdev
-
 #CMD bash -C '/src/entry.sh';'bash'
